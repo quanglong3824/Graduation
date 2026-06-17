@@ -114,6 +114,7 @@
                 opacity: 0;
                 transform: translateY(15px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -191,6 +192,7 @@
                 opacity: 0;
                 transform: scale(0.95);
             }
+
             to {
                 opacity: 1;
                 transform: scale(1);
@@ -253,9 +255,17 @@
         }
 
         @keyframes shine {
-            0% { left: -100%; }
-            20% { left: 150%; }
-            100% { left: 150%; }
+            0% {
+                left: -100%;
+            }
+
+            20% {
+                left: 150%;
+            }
+
+            100% {
+                left: 150%;
+            }
         }
 
         .graduate-name {
@@ -579,9 +589,11 @@
             width: 100%;
             transition: border-color 0.3s ease;
         }
+
         .map-container:hover {
             border-color: var(--accent-blue);
         }
+
         .map-container iframe {
             width: 100%;
             height: 100%;
@@ -646,9 +658,11 @@
             0% {
                 transform: translateY(0) rotate(0deg) scale(1);
             }
+
             50% {
                 transform: translateY(-25px) rotate(180deg) scale(1.1);
             }
+
             100% {
                 transform: translateY(0) rotate(360deg) scale(1);
             }
@@ -686,8 +700,8 @@
         .card:hover {
             border-color: rgba(0, 114, 188, 0.35);
             box-shadow: 0 30px 60px -15px rgba(0, 50, 100, 0.12),
-                        0 0 40px rgba(0, 114, 188, 0.05),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+                0 0 40px rgba(0, 114, 188, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
         }
 
         /* Responsive */
@@ -770,7 +784,7 @@
 
     <div class="glow glow-1"></div>
     <div class="glow glow-2"></div>
-    
+
     <div class="card">
         <!-- Corner Borders for sharp geometric look -->
         <div class="corner-border top-left"></div>
@@ -811,7 +825,7 @@
             <div class="detail-item time">
                 <i class="fa-regular fa-calendar-check"></i>
                 <div>
-                    <div class="detail-title">Thời gian</div>
+                    <div class="detail-title">Thời gian ( Dự kiến )</div>
                     <div class="detail-value">07:00 AM<br>Thứ Bảy, 25/07/2026</div>
                 </div>
             </div>
@@ -826,7 +840,10 @@
 
         <!-- Map Embed -->
         <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3918.4821863581587!2d106.7716942!3d10.8508827!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752763f23816ab%3A0x282f711441b6916f!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2jhu4cgS-G7uSB0aHXhuq10IFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaA!5e0!3m2!1svi!2s!4v1781660276357!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3918.4821863581587!2d106.7716942!3d10.8508827!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752763f23816ab%3A0x282f711441b6916f!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2jhu4cgS-G7uSB0aHXhuq10IFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaA!5e0!3m2!1svi!2s!4v1781660276357!5m2!1svi!2s"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
 
         <!-- Countdown Timer -->
@@ -857,7 +874,8 @@
             <button class="btn btn-primary" onclick="openModal()">
                 <i class="fa-regular fa-envelope-open"></i> Xác nhận tham dự (RSVP)
             </button>
-            <a href="https://www.google.com/maps?ll=10.850632,106.771913&z=15&t=m&hl=vi&gl=US&mapclient=embed&cid=2895657417238286703" target="_blank" class="btn btn-secondary">
+            <a href="https://www.google.com/maps?ll=10.850632,106.771913&z=15&t=m&hl=vi&gl=US&mapclient=embed&cid=2895657417238286703"
+                target="_blank" class="btn btn-secondary">
                 <i class="fa-solid fa-map-location-dot"></i> Chỉ đường trên Bản đồ
             </a>
         </div>
@@ -904,7 +922,8 @@
             </div>
             <div id="successState" class="success-state">
                 <i class="fa-solid fa-circle-check success-icon"></i>
-                <div class="modal-title" style="margin-bottom: 10px; border-bottom: none; padding-bottom: 0;">Cảm Ơn Bạn!</div>
+                <div class="modal-title" style="margin-bottom: 10px; border-bottom: none; padding-bottom: 0;">Cảm Ơn
+                    Bạn!</div>
                 <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 20px;">
                     Thông tin phản hồi của bạn đã được ghi nhận. Hẹn gặp lại bạn tại lễ tốt nghiệp!
                 </p>
