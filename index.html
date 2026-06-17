@@ -879,19 +879,32 @@
             const actions = document.querySelector('.actions');
             const downloadBtn = document.querySelector('.download-btn-container');
 
-            // Temporarily hide interactive components for clean capture
+            // Save original styles
+            const originalBg = card.style.background;
+            const originalBackdrop = card.style.backdropFilter;
+            const originalWebkitBackdrop = card.style.webkitBackdropFilter;
+
+            // Temporarily hide interactive components and apply solid white background for clean capture
             if (mapContainer) mapContainer.style.display = 'none';
             if (actions) actions.style.display = 'none';
             if (downloadBtn) downloadBtn.style.display = 'none';
+
+            card.style.background = '#ffffff';
+            card.style.backdropFilter = 'none';
+            card.style.webkitBackdropFilter = 'none';
 
             // html2canvas capture options
             html2canvas(card, {
                 useCORS: true,
                 scale: 3, // High quality scale
-                backgroundColor: null, // Keep transparency if card has border-radius
+                backgroundColor: null, // Keep transparency outside the card's border-radius
                 logging: false
             }).then(canvas => {
-                // Restore interactive components
+                // Restore original styles and interactive components
+                card.style.background = originalBg;
+                card.style.backdropFilter = originalBackdrop;
+                card.style.webkitBackdropFilter = originalWebkitBackdrop;
+
                 if (mapContainer) mapContainer.style.display = 'block';
                 if (actions) actions.style.display = 'flex';
                 if (downloadBtn) downloadBtn.style.display = 'block';
@@ -919,6 +932,10 @@
             }).catch(err => {
                 console.error('Failed to generate card image:', err);
                 // Restore in case of failure
+                card.style.background = originalBg;
+                card.style.backdropFilter = originalBackdrop;
+                card.style.webkitBackdropFilter = originalWebkitBackdrop;
+
                 if (mapContainer) mapContainer.style.display = 'block';
                 if (actions) actions.style.display = 'flex';
                 if (downloadBtn) downloadBtn.style.display = 'block';
