@@ -18,6 +18,9 @@
 
     <!-- Canvas Confetti for Celebration -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!-- html2canvas to save/download card as an image -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
             --primary: #ffffff;
@@ -755,6 +758,13 @@
                 <i class="fa-solid fa-map-location-dot"></i> Chỉ đường trên Bản đồ
             </a>
         </div>
+
+        <!-- Tiny Save Card Button -->
+        <div class="download-btn-container" style="margin-top: 25px;">
+            <button onclick="downloadCard()" style="background: none; border: none; color: var(--text-muted); font-size: 0.75rem; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; opacity: 0.7; transition: all 0.2s;" onmouseover="this.style.opacity=1; this.style.color='var(--accent-blue)';" onmouseout="this.style.opacity=0.7; this.style.color='var(--text-muted)';">
+                <i class="fa-solid fa-download"></i> Tải ảnh thiệp (để chia sẻ)
+            </button>
+        </div>
     </div>
 
 
@@ -800,6 +810,43 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
+        // Download Card as Image
+        function downloadCard() {
+            const card = document.querySelector('.card');
+            const mapContainer = document.querySelector('.map-container');
+            const actions = document.querySelector('.actions');
+            const downloadBtn = document.querySelector('.download-btn-container');
+
+            // Temporarily hide interactive components for clean capture
+            if (mapContainer) mapContainer.style.display = 'none';
+            if (actions) actions.style.display = 'none';
+            if (downloadBtn) downloadBtn.style.display = 'none';
+
+            // html2canvas capture options
+            html2canvas(card, {
+                useCORS: true,
+                scale: 3, // High quality scale
+                backgroundColor: null, // Keep transparency if card has border-radius
+                logging: false
+            }).then(canvas => {
+                // Restore interactive components
+                if (mapContainer) mapContainer.style.display = 'block';
+                if (actions) actions.style.display = 'flex';
+                if (downloadBtn) downloadBtn.style.display = 'block';
+
+                // Download the generated image
+                const link = document.createElement('a');
+                link.download = 'Thiep_Moi_Tot_Nghiep_Quang_Long.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            }).catch(err => {
+                console.error('Failed to generate card image:', err);
+                // Restore in case of failure
+                if (mapContainer) mapContainer.style.display = 'block';
+                if (actions) actions.style.display = 'flex';
+                if (downloadBtn) downloadBtn.style.display = 'block';
+            });
+        }
     </script>
 </body>
 
