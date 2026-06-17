@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thư Mời Lễ Tốt Nghiệp</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Canvas Confetti for Celebration -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --primary: #ffffff;
+            --primary-light: #f8fafc;
+            --accent-blue: #0072bc;
+            --accent-red: #ed1c24;
+            --accent-blue-hover: #005ea1;
+            --accent-red-hover: #cf141b;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --text-light: #ffffff;
+            --bg-gradient: radial-gradient(circle at top, #ffffff 0%, #f1f5f9 60%, #e2e8f0 100%);
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-border: rgba(0, 114, 188, 0.15);
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-gradient);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+            z-index: 1;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(rgba(0, 114, 188, 0.08) 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.8;
+        }
+
+        /* Ambient Background Glows */
+        .glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(80px);
+        }
+
+        .glow-1 {
+            top: -10%;
+            left: -10%;
+            background: radial-gradient(circle, rgba(0, 114, 188, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+        }
+
+        .glow-2 {
+            bottom: -10%;
+            right: -10%;
+            background: radial-gradient(circle, rgba(237, 28, 36, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+        }
+
+        /* Container Card */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            max-width: 600px;
+            width: 100%;
+            padding: 45px 35px;
+            text-align: center;
+            box-shadow: 0 20px 40px -10px rgba(0, 50, 100, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            animation: fadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Decorative Borders & Corners */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 16px;
+            bottom: 16px;
+            left: 16px;
+            right: 16px;
+            border: 1px solid rgba(0, 114, 188, 0.12);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .corner-border {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--accent-blue);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .top-left {
+            top: 12px;
+            left: 12px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .top-right {
+            top: 12px;
+            right: 12px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .bottom-left {
+            bottom: 12px;
+            left: 12px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .bottom-right {
+            bottom: 12px;
+            right: 12px;
+            border-left: none;
+            border-top: none;
+        }
+
+        /* Logo Branding */
+        .logo-container {
+            margin: 5px 0 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-img {
+            max-height: 110px;
+            max-width: 90%;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 10px rgba(0, 114, 188, 0.15));
+            animation: fadeInLogo 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeInLogo {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Typography */
+        .subtitle-top {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--accent-blue);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-family: var(--font-serif);
+            font-size: 2.4rem;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 20px;
+            background: linear-gradient(180deg, #0c1f3d 30%, #334155 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.5px;
+        }
+
+        .invitation-text {
+            font-size: 1.02rem;
+            line-height: 1.65;
+            color: #475569;
+            max-width: 480px;
+            margin: 0 auto 30px;
+        }
+
+        /* Graduate Info */
+        .graduate-box {
+            background: linear-gradient(90deg, rgba(0, 114, 188, 0.06) 0%, rgba(237, 28, 36, 0.02) 100%);
+            border: 1px solid rgba(0, 114, 188, 0.12);
+            border-left: 4px solid var(--accent-blue);
+            border-radius: 4px;
+            padding: 24px 20px;
+            margin-bottom: 30px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .graduate-box::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: skewX(-25deg);
+            animation: shine 6s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 150%; }
+            100% { left: 150%; }
+        }
+
+        .graduate-name {
+            font-family: var(--font-serif);
+            font-size: 1.85rem;
+            color: #0c1f3d;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .graduate-major {
+            font-size: 0.9rem;
+            color: var(--accent-blue);
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* Details Grid */
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 35px;
+            text-align: left;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 18px 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 4px;
+            border: 1px solid rgba(0, 114, 188, 0.12);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .detail-item:hover {
+            border-color: rgba(0, 114, 188, 0.3);
+            background: rgba(0, 114, 188, 0.04);
+            transform: translateY(-2px);
+        }
+
+        .detail-item.time i {
+            color: var(--accent-blue);
+            font-size: 1.2rem;
+            margin-top: 3px;
+            text-shadow: 0 2px 4px rgba(0, 114, 188, 0.1);
+        }
+
+        .detail-item.location i {
+            color: var(--accent-red);
+            font-size: 1.2rem;
+            margin-top: 3px;
+            text-shadow: 0 2px 4px rgba(237, 28, 36, 0.1);
+        }
+
+        .detail-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #64748b;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .detail-value {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #1e293b;
+            line-height: 1.45;
+        }
+
+        /* Countdown Timer */
+        .countdown-container {
+            margin-bottom: 35px;
+        }
+
+        .countdown-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #64748b;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .time-box {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(0, 114, 188, 0.12);
+            border-radius: 4px;
+            min-width: 70px;
+            padding: 12px 5px;
+            transition: all 0.3s ease;
+        }
+
+        .time-box:hover {
+            border-color: var(--accent-blue);
+            background: rgba(0, 114, 188, 0.04);
+        }
+
+        .time-num {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+
+        .time-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #64748b;
+            margin-top: 3px;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        /* CTA Buttons */
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            max-width: 320px;
+            padding: 14px 28px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #005ea1 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 114, 188, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 114, 188, 0.35);
+            background: linear-gradient(135deg, var(--accent-blue-hover) 0%, var(--accent-blue) 100%);
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: var(--accent-red);
+            border: 1px solid rgba(237, 28, 36, 0.6);
+            box-shadow: 0 2px 8px rgba(237, 28, 36, 0.04);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-red);
+            color: #ffffff;
+            border-color: var(--accent-red);
+            box-shadow: 0 6px 18px rgba(237, 28, 36, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* RSVP Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+        }
+
+        .modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            border: 1px solid rgba(0, 114, 188, 0.2);
+            border-radius: 8px;
+            padding: 35px 30px;
+            max-width: 450px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0, 30, 80, 0.15);
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #64748b;
+            font-size: 1.25rem;
+            cursor: pointer;
+            z-index: 3;
+            transition: color 0.2s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--accent-red);
+        }
+
+        .modal-title {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            color: #0c1f3d;
+            border-bottom: 2px solid var(--accent-blue);
+            padding-bottom: 8px;
+            margin-bottom: 25px;
+            display: inline-block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            color: #475569;
+            margin-bottom: 8px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            border-radius: 4px;
+            color: #0f172a;
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            background: rgba(0, 114, 188, 0.02);
+            box-shadow: 0 0 6px rgba(0, 114, 188, 0.15);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 8px;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: #334155;
+        }
+
+        .radio-label input[type="radio"] {
+            accent-color: var(--accent-blue);
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Success screen in Modal */
+        .success-state {
+            display: none;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .success-icon {
+            font-size: 3.5rem;
+            color: var(--accent-blue);
+            margin-bottom: 15px;
+        }
+
+        /* Map Embed */
+        .map-container {
+            margin-bottom: 35px;
+            border: 1px solid rgba(0, 114, 188, 0.15);
+            border-radius: 4px;
+            overflow: hidden;
+            height: 220px;
+            width: 100%;
+            transition: border-color 0.3s ease;
+        }
+        .map-container:hover {
+            border-color: var(--accent-blue);
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        /* Title Divider */
+        .title-divider {
+            width: 70px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue) 0%, var(--accent-red) 100%);
+            margin: -5px auto 25px;
+            border-radius: 2px;
+        }
+
+        /* Floating Background Shapes */
+        .floating-shape {
+            position: absolute;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.12;
+            animation: floatShape 25s infinite linear;
+        }
+
+        .shape-1 {
+            top: 15%;
+            left: 10%;
+            color: var(--accent-blue);
+            font-size: 1.5rem;
+            animation-duration: 20s;
+        }
+
+        .shape-2 {
+            bottom: 20%;
+            right: 12%;
+            color: var(--accent-red);
+            font-size: 1.8rem;
+            animation-duration: 28s;
+            animation-delay: -5s;
+        }
+
+        .shape-3 {
+            top: 70%;
+            left: 8%;
+            color: var(--accent-blue);
+            font-size: 1.2rem;
+            animation-duration: 22s;
+            animation-delay: -10s;
+        }
+
+        .shape-4 {
+            top: 25%;
+            right: 15%;
+            color: var(--accent-red);
+            font-size: 1.3rem;
+            animation-duration: 32s;
+            animation-delay: -15s;
+        }
+
+        @keyframes floatShape {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            50% {
+                transform: translateY(-25px) rotate(180deg) scale(1.1);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg) scale(1);
+            }
+        }
+
+        /* Hover interactions for Card Corners & Shadows */
+        .corner-border {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+        }
+
+        .card:hover .top-left {
+            transform: translate(-3px, -3px);
+            border-color: var(--accent-red);
+        }
+
+        .card:hover .top-right {
+            transform: translate(3px, -3px);
+            border-color: var(--accent-red);
+        }
+
+        .card:hover .bottom-left {
+            transform: translate(-3px, 3px);
+            border-color: var(--accent-red);
+        }
+
+        .card:hover .bottom-right {
+            transform: translate(3px, 3px);
+            border-color: var(--accent-red);
+        }
+
+        .card {
+            transition: box-shadow 0.4s ease, border-color 0.4s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(0, 114, 188, 0.35);
+            box-shadow: 0 30px 60px -15px rgba(0, 50, 100, 0.12),
+                        0 0 40px rgba(0, 114, 188, 0.05),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .card {
+                padding: 35px 20px;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Elegant Flat Portrait Card */
+        .photo-card-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 25px 0 35px;
+        }
+
+        .photo-card {
+            width: 280px;
+            height: 350px;
+            position: relative;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 70, 150, 0.08);
+            background: #ffffff;
+            border: 1px solid rgba(0, 114, 188, 0.15);
+            overflow: hidden;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .photo-frame {
+            position: absolute;
+            inset: 12px;
+            border: 1.5px solid rgba(0, 114, 188, 0.25);
+            border-radius: 8px;
+            pointer-events: none;
+            z-index: 2;
+            transition: border-color 0.3s ease;
+        }
+
+        .photo-fg {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) scale(1.02);
+            width: 95%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+            z-index: 1;
+            filter: drop-shadow(0 5px 12px rgba(0, 50, 120, 0.15));
+        }
+
+        /* Subtle and cheap hover feedback (extremely lightweight, no performance cost) */
+        .photo-card:hover {
+            box-shadow: 0 15px 35px rgba(0, 50, 120, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .photo-card:hover .photo-frame {
+            border-color: rgba(237, 28, 36, 0.35);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Background Shapes -->
+    <div class="floating-shape shape-1"><i class="fa-solid fa-plus"></i></div>
+    <div class="floating-shape shape-2"><i class="fa-solid fa-graduation-cap"></i></div>
+    <div class="floating-shape shape-3"><i class="fa-solid fa-circle"></i></div>
+    <div class="floating-shape shape-4"><i class="fa-solid fa-plus"></i></div>
+
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    
+    <div class="card">
+        <!-- Corner Borders for sharp geometric look -->
+        <div class="corner-border top-left"></div>
+        <div class="corner-border top-right"></div>
+        <div class="corner-border bottom-left"></div>
+        <div class="corner-border bottom-right"></div>
+
+        <!-- Logo Branding -->
+        <div class="logo-container">
+            <img src="image.png" alt="Logo" class="logo-img">
+        </div>
+
+        <div class="subtitle-top">Trân trọng kính mời</div>
+        <h1>Lễ Tốt Nghiệp</h1>
+        <div class="title-divider"></div>
+
+        <p class="invitation-text">
+            Sự hiện diện của Quý vị là niềm vinh hạnh lớn cho tôi và gia đình trong cột mốc đánh dấu chặng đường học tập
+            ý nghĩa này.
+        </p>
+
+        <!-- Elegant Flat Portrait Card -->
+        <div class="photo-card-container">
+            <div class="photo-card">
+                <div class="photo-frame"></div>
+                <img src="student_cutout.png" alt="Lê Quang Long Portrait" class="photo-fg">
+            </div>
+        </div>
+
+        <!-- Graduate Info -->
+        <div class="graduate-box">
+            <div class="graduate-name">Lê Quang Long</div>
+            <div class="graduate-major">Kỹ sư Công nghệ Thông tin</div>
+        </div>
+
+        <!-- Details Grid -->
+        <div class="details-grid">
+            <div class="detail-item time">
+                <i class="fa-regular fa-calendar-check"></i>
+                <div>
+                    <div class="detail-title">Thời gian</div>
+                    <div class="detail-value">07:00 AM<br>Thứ Bảy, 25/07/2026</div>
+                </div>
+            </div>
+            <div class="detail-item location">
+                <i class="fa-solid fa-location-dot"></i>
+                <div>
+                    <div class="detail-title">Địa điểm</div>
+                    <div class="detail-value">01 Đ. Võ Văn Ngân, Thủ Đức,<br>Hồ Chí Minh, Việt Nam</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map Embed -->
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3918.4821863581587!2d106.7716942!3d10.8508827!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752763f23816ab%3A0x282f711441b6916f!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2jhu4cgS-G7uSB0aHXhuq10IFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaA!5e0!3m2!1svi!2s!4v1781660276357!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <!-- Countdown Timer -->
+        <div class="countdown-container">
+            <div class="countdown-title">Thời gian còn lại</div>
+            <div class="timer">
+                <div class="time-box">
+                    <div class="time-num" id="days">00</div>
+                    <div class="time-label">Ngày</div>
+                </div>
+                <div class="time-box">
+                    <div class="time-num" id="hours">00</div>
+                    <div class="time-label">Giờ</div>
+                </div>
+                <div class="time-box">
+                    <div class="time-num" id="mins">00</div>
+                    <div class="time-label">Phút</div>
+                </div>
+                <div class="time-box">
+                    <div class="time-num" id="secs">00</div>
+                    <div class="time-label">Giây</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="actions">
+            <button class="btn btn-primary" onclick="openModal()">
+                <i class="fa-regular fa-envelope-open"></i> Xác nhận tham dự (RSVP)
+            </button>
+            <a href="https://www.google.com/maps?ll=10.850632,106.771913&z=15&t=m&hl=vi&gl=US&mapclient=embed&cid=2895657417238286703" target="_blank" class="btn btn-secondary">
+                <i class="fa-solid fa-map-location-dot"></i> Chỉ đường trên Bản đồ
+            </a>
+        </div>
+    </div>
+
+    <!-- RSVP Modal -->
+    <div class="modal" id="rsvpModal">
+        <div class="modal-content">
+            <!-- Corner Borders for Modal -->
+            <div class="corner-border top-left" style="top: 10px; left: 10px; width: 12px; height: 12px;"></div>
+            <div class="corner-border top-right" style="top: 10px; right: 10px; width: 12px; height: 12px;"></div>
+            <div class="corner-border bottom-left" style="bottom: 10px; left: 10px; width: 12px; height: 12px;"></div>
+            <div class="corner-border bottom-right" style="bottom: 10px; right: 10px; width: 12px; height: 12px;"></div>
+
+            <button class="close-modal" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+
+            <div id="rsvpFormState">
+                <div class="modal-title">Xác Nhận Tham Dự</div>
+                <form id="rsvpForm" onsubmit="submitForm(event)">
+                    <div class="form-group">
+                        <label class="form-label" for="guestName">Họ và Tên của bạn</label>
+                        <input type="text" id="guestName" class="form-control" placeholder="Nhập tên của bạn" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Bạn sẽ tham dự chứ?</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="attendance" value="yes" checked> Chắc chắn tham dự
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="attendance" value="no"> Rất tiếc không thể đến
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="guestNote">Lời chúc / Lời nhắn</label>
+                        <textarea id="guestNote" class="form-control" rows="3"
+                            placeholder="Gửi lời chúc đến tân cử nhân..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+                        Gửi Xác Nhận
+                    </button>
+                </form>
+            </div>
+            <div id="successState" class="success-state">
+                <i class="fa-solid fa-circle-check success-icon"></i>
+                <div class="modal-title" style="margin-bottom: 10px; border-bottom: none; padding-bottom: 0;">Cảm Ơn Bạn!</div>
+                <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 20px;">
+                    Thông tin phản hồi của bạn đã được ghi nhận. Hẹn gặp lại bạn tại lễ tốt nghiệp!
+                </p>
+                <button class="btn btn-secondary" onclick="closeModal()" style="width: 100%;">Đóng</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Trigger confetti on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const duration = 2 * 1000;
+            const end = Date.now() + duration;
+            (function frame() {
+                confetti({
+                    particleCount: 2,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#0072bc', '#ed1c24', '#ffffff']
+                });
+                confetti({
+                    particleCount: 2,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#0072bc', '#ed1c24', '#ffffff']
+                });
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        });
+        // Set Target Date for Countdown
+        const targetDate = new Date('2026-07-25T07:00:00');
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate.getTime() - now;
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+            document.getElementById('days').innerText = String(days).padStart(2, '0');
+            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('mins').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('secs').innerText = String(seconds).padStart(2, '0');
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+        // Modal Logic
+        const modal = document.getElementById('rsvpModal');
+        const formState = document.getElementById('rsvpFormState');
+        const successState = document.getElementById('successState');
+        function openModal() {
+            modal.classList.add('active');
+        }
+        function closeModal() {
+            modal.classList.remove('active');
+            // Reset state after transition
+            setTimeout(() => {
+                formState.style.display = 'block';
+                successState.style.display = 'none';
+                document.getElementById('rsvpForm').reset();
+            }, 300);
+        }
+        function submitForm(event) {
+            event.preventDefault();
+
+            // Fire mini confetti splash
+            confetti({
+                particleCount: 80,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#0072bc', '#ed1c24', '#ffffff']
+            });
+            formState.style.display = 'none';
+            successState.style.display = 'block';
+        }
+
+
+        // Close modal when clicking outside content
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+
+</html>
